@@ -1,0 +1,11 @@
+<div class="topnav">
+  <a class="active" href="{% url 'dashboard' %}">Dashboard</a>
+  <a href="{% url 'job_list' %}">Jobs</a>
+
+ {% if request.user.user_type == 'JobSeeker' %}
+  <a href="{% url 'my_application' %}">My Application</a>
+ {% endif %}
+
+  <a href="{% url 'profile' %}">Profile</a>
+  <a href="{% url 'logout_func' %}">Logout</a>
+</div>

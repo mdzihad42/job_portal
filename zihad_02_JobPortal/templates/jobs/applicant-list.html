@@ -1,0 +1,43 @@
+{% extends 'master/base.html' %}
+
+{% block content %}
+
+<h1>Applicant List</h1>
+
+
+<table>
+    <tr>
+        <th>SL</th>
+        <th>Job Title</th>
+        <th>Applicant Name</th>
+        <th>Resume</th>
+        <th>Applied Date</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+
+    
+    {% for i in applicant_data %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{i.job.job_title}}</td>
+        <td>{{i.applied_by.full_name}}</td>
+        <td>
+            <a href="{{i.resume.url}}" target="_blank">Download</a>
+        </td>
+
+        <td>{{i.applied_date}}</td>
+        <td>{{i.status}}</td>
+        <td>
+            <a href="{% url 'shortlisted' i.id %}">Shortlisted</a>
+            <a href="{% url 'rejected' i.id %}">Rejected</a>
+        </td>
+
+    </tr>
+        
+    {% endfor %}
+        
+</table>
+
+{% endblock content %}
+    

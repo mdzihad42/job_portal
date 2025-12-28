@@ -1,0 +1,35 @@
+{% extends 'master/base.html' %}
+
+{% block content %}
+
+<h1>My Application</h1>
+
+
+<table>
+    <tr>
+        <th>SL</th>
+        <th>Job Title</th>
+        <th>Salary</th>
+        <th>Deadline</th>
+        <th>Applied Date</th>
+        <th>Status</th>
+    </tr>
+
+    
+    {% for i in job_data %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{i.job.job_title}}</td>
+        <td>{{i.job.salary}}</td>
+        <td>{{i.job.deadline}}</td>
+        <td>{{i.applied_date}}</td>
+        <td>{{i.status}}</td>
+
+    </tr>
+        
+    {% endfor %}
+        
+</table>
+
+{% endblock content %}
+    

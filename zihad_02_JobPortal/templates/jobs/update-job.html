@@ -1,0 +1,30 @@
+{% extends 'master/base.html' %}
+
+{% block content %}
+<h1>Update Job</h1>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <label for="fname">Job_title </label>
+    <input type="text" id="fname" value="{{job_data.job_title}}" name="job_title"placeholder="Your job_title..">
+
+    <label for="fname">Description </label>
+    <input type="text" id="fname" value="{{job_data.description}}" name="description"placeholder="Your description..">
+    <label for="number_of_openings">number_of_openings </label>
+    <input type="text" id="fname" value="{{job_data.number_of_openings}}" name="number_of_openings"placeholder="Your number_of_openings..">
+
+    <label for="fname">skills_required </label>
+    <input type="text" id="fname" value="{{job_data.skills_required}}" name="skills_required"placeholder="Your skills_required..">
+    
+    <label for="fname">salary </label>
+    <input type="text" id="fname" value="{{job_data.salary}}" name="salary"placeholder="Your salary..">
+
+    <label for="fname">Deadline </label>
+    <input type="date" id="fname" value="{{job_data.deadline|date:'Y-m-d'}}" name="deadline">
+
+
+  <input type="submit" value="Update-Job">
+</form>
+
+{% endblock content %}
+    

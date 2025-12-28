@@ -1,0 +1,57 @@
+{% extends 'master/base.html' %}
+
+{% block content %}
+<h1>Job List</h1>
+
+{% include 'master/message.html' %}
+
+
+{% if request.user.user_type == 'Recruiters' %}
+    <a href="{% url 'add_job' %}" class="btn btn-success mb-4">Add Job</a>
+{% endif %}
+
+
+{% if request.user.user_type == 'JobSeeker' %}
+    <a href="{% url 'job_search' %}" class="btn btn-primary mb-4">Search Jobs</a>
+{% endif %}
+
+<table class="table-auto border-collapse border border-gray-300 w-full">
+    <thead>
+        <tr class="bg-gray-200">
+            <th class="border px-4 py-2">SL</th>
+            <th class="border px-4 py-2">Job Title</th>
+            <th class="border px-4 py-2">Number of Openings</th>
+            <th class="border px-4 py-2">Skills Required</th>
+            <th class="border px-4 py-2">Salary</th>
+            <th class="border px-4 py-2">Deadline</th>
+            <th class="border px-4 py-2">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for job in job_data %}
+        <tr>
+            <td class="border px-4 py-2">{{ forloop.counter }}</td>
+            <td class="border px-4 py-2">{{ job.job_title }}</td>
+            <td class="border px-4 py-2">{{ job.number_of_openings }}</td>
+            <td class="border px-4 py-2">{{ job.skills_required }}</td>
+            <td class="border px-4 py-2">{{ job.salary }}</td>
+            <td class="border px-4 py-2">{{ job.deadline }}</td>
+            <td class="border px-4 py-2">
+                {% if request.user.user_type == 'Recruiters' %}
+                    <a href="{% url 'update_job' job.id %}" class="text-blue-500 mr-2">Edit</a>
+                    <a href="{% url 'delete_job' job.id %}" class="text-red-500 mr-2">Delete</a>
+                    <a href="{% url 'applicant_list' job.id %}" class="text-green-500">Applicant List</a>
+                {% else %}
+                    <a href="{% url 'applied_job' job.id %}" class="btn btn-primary">Apply</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="7" class="border px-4 py-2 text-center">No jobs found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}

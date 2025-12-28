@@ -1,0 +1,37 @@
+{% extends 'master/base.html' %}
+
+{% block content %}
+<div class="pp">
+<div class="prof">
+{% if request.user.user_type == 'Recruiters' %}
+    {% if request.user.employer_profile.profile_picture %}
+        <img src="{{ request.user.employer_profile.profile_picture.url }}" 
+             alt="Profile Picture"
+             style="width:150px; height:150px; border-radius:50%; object-fit:cover;">
+    {% endif %}
+{% else %}
+    {% if request.user.seeker_profile.profile_picture %}
+        <img src="{{ request.user.seeker_profile.profile_picture.url }}" 
+             alt="Profile Picture"
+             style="width:150px; height:150px; border-radius:50%; object-fit:cover;">
+    {% endif %}
+{% endif %}
+
+<p>Username: {{request.user.username}}</p>
+<p>User Type: {{request.user.user_type}}</p>
+
+
+{% if request.user.user_type == 'Recruiters' %}
+<p>Company Name: {{request.user.employer_profile.company_name}}</p>
+<p>Address: {{request.user.employer_profile.address}}</p>
+{% else %}
+<p>Full Name: {{request.user.seeker_profile.full_name}}</p>
+<p>Contact:  {{request.user.seeker_profile.contact_numer}}</p>
+<p>Last Education:  {{request.user.seeker_profile.last_education}}</p>
+{% endif %}
+
+<a href="{% url 'update_profile' %}">Update Profile</a>
+</div>
+</div>
+{% endblock content %}
+    

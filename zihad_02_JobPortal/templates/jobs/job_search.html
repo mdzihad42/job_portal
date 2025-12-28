@@ -1,0 +1,46 @@
+{% extends 'master/base.html' %}
+
+{% block content %}
+<h1>Search Jobs</h1>
+
+<form method="GET" class="mb-4">
+    <input type="text" name="q" placeholder="Job Title" value="{{ query }}" class="border p-2 rounded mr-2">
+    <input type="text" name="skills" placeholder="Skills" value="{{ skills }}" class="border p-2 rounded mr-2">
+    <button type="submit" class="bg-blue-500 text-white p-2 rounded">Search</button>
+    <a href="{% url 'job_search' %}" class="ml-2 text-gray-600">Reset</a>
+</form>
+
+<table class="table-auto border-collapse border border-gray-300 w-full">
+    <thead>
+        <tr class="bg-gray-200">
+            <th>SL</th>
+            <th>Job Title</th>
+            <th>Number of Openings</th>
+            <th>Skills</th>
+            <th>Salary</th>
+            <th>Deadline</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for job in job_data %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ job.job_title }}</td>
+            <td>{{ job.number_of_openings }}</td>
+            <td>{{ job.skills_required }}</td>
+            <td>{{ job.salary }}</td>
+            <td>{{ job.deadline }}</td>
+            <td>
+                <a href="{% url 'applied_job' job.id %}" class="btn btn-primary">Apply</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="7" class="text-center">No jobs found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}

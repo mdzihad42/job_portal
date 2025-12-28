@@ -1,0 +1,31 @@
+{% extends 'master/base.html' %}
+
+{% block content %}
+<h1>Add Job</h1>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <label for="fname">Job_title </label>
+    <input type="text" id="fname" name="job_title"placeholder="Your job_title..">
+
+    <label for="fname">Description </label>
+    <input type="text" id="fname" name="description"placeholder="Your description..">
+
+    <label for="number_of_openings">number_of_openings </label>
+    <input type="text" id="number_of_openings" name="number_of_openings"placeholder="Your number_of_openings..">
+    
+    <label for="fname">skills_required </label>
+    <input type="text" id="fname" name="skills_required"placeholder="Your skills_required..">
+    
+    <label for="fname">salary </label>
+    <input type="text" id="fname" name="salary"placeholder="Your salary..">
+
+    <label for="fname">Deadline </label>
+    <input type="date" id="fname" name="deadline"placeholder="Your deadline..">
+
+
+  <input type="submit" value="Post Job">
+</form>
+
+{% endblock content %}
+    
